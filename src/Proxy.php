@@ -5,7 +5,7 @@ namespace PeopleSearch;
 class Proxy
 {
 
-    protected $url = "http://staging.jhu.edu/jhed-proxy";
+    protected $url = "http://staging.jhu.edu/jhed-proxy/";
 
     public function __construct($options)
     {
