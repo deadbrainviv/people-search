@@ -2,10 +2,10 @@
 
 namespace PeopleSearch;
 
-class Searcher
+class Proxy
 {
 
-    public $url = "https://stage.johnshopkins.edu/portalcontent/search/framework/service/people/peoplewebservice.cfc";
+    public $url = "http://staging.jhu.edu/jhed-proxy";
 
     public function __construct($options)
     {
@@ -24,23 +24,18 @@ class Searcher
 
     public function search($criteria = null)
     {
-        $params = $this->options;
-
         if (!empty($criteria)) {
-            $this->options["criteria"] = $criteria;
+            $this->options->criteria = $criteria;
         }
 
         $url = $this->getUrl();
-
-        echo $url; die();
 
         $c = curl_init($url);
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
         $resp = curl_exec($c);
         curl_close($c);
 
-        $results = !empty($resp) ? wddx_deserialize($resp) : array();
-        unset($results["WEBSERVICEKEY"]);
+        $results = !empty($resp) ? json_decode($resp) : array();
 
         return $results;
     }
