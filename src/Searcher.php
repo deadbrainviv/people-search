@@ -27,7 +27,7 @@ class Searcher
         $resp = curl_exec($c);
         curl_close($c);
 
-        $results = wddx_deserialize($resp);
+        $results = !empty($resp) ? wddx_deserialize($resp) : array();
         unset($results["WEBSERVICEKEY"]);
 
         return $results;
