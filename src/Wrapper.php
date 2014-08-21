@@ -2,8 +2,6 @@
 
 namespace PeopleSearch;
 
-use Secrets\Secret;
-
 class Wrapper
 {
 
@@ -19,18 +17,13 @@ class Wrapper
 
         // otherwise, get a regular search object
         else {
-            $this->people = new Searcher((array) Secret::get("jhed") + $options);
+            $this->people = new Searcher($options);
         }
-    }
-
-    public function setIpAddress($ip)
-    {
-        $this->people->setIpAddress($ip);
     }
 
     public function search($criteria = null)
     {
-        return $this->people->search(urldecode($criteria));
+        return $this->people->search();
     }
 
 }

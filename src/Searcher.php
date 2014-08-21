@@ -2,19 +2,20 @@
 
 namespace PeopleSearch;
 
+use Secrets\Secret;
+
 class Searcher
 {
 
-    public $url = "https://stage.johnshopkins.edu/portalcontent/search/framework/service/people/peoplewebservice.cfc";
+    protected $url = "https://stage.johnshopkins.edu/portalcontent/search/framework/service/people/peoplewebservice.cfc";
 
     public function __construct($options)
     {
-        $this->options = $options;
-    }
+        $this->options = (array) Secret::get("jhed") + $options;
 
-    public function setIpAddress($ip)
-    {
-        $this->options["ipaddress"] = $ip;
+        if (empty($this->options["ipaddress"])) {
+            $this->options["ipaddress"] = $_SERVER["REMOTE_ADDR"];
+        }
     }
 
     public function getUrl()
@@ -22,19 +23,9 @@ class Searcher
         return $this->url . "?" . http_build_query($this->options);
     }
 
-    public function search($criteria = null)
+    public function search()
     {
-        $params = $this->options;
-
-        if (!empty($criteria)) {
-            $this->options["criteria"] = $criteria;
-        }
-
-        $url = $this->getUrl();
-
-        echo $url; die();
-
-        $c = curl_init($url);
+        $c = curl_init($this->getUrl());
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
         $resp = curl_exec($c);
         curl_close($c);
