@@ -5,13 +5,18 @@ namespace PeopleSearch;
 class Wrapper
 {
 
-    public function __construct($options)
+    public function __construct($options = array(), $env = "local")
     {
-        // find environment
-        $env = defined("ENV") ? ENV : "local";
+        $this->env = $env;
+        if (!empty($options)) {
+            $this->setup($options);
+        }
+    }
 
+    public function setup($options)
+    {
         // if local, get a proxy object
-        if ($env === "local") {
+        if ($this->env === "local") {
             $this->people = new Proxy($options);
         }
 
