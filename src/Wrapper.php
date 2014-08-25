@@ -24,9 +24,10 @@ class Wrapper
         else {
             $this->people = new Searcher($options);
         }
+
     }
 
-    public function search($criteria = null)
+    public function search()
     {
         return $this->people->search();
     }
