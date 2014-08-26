@@ -33,7 +33,18 @@ class Searcher
         $results = !empty($resp) ? wddx_deserialize($resp) : array();
         unset($results["WEBSERVICEKEY"]);
 
-        return $results;
+        if (isset($results["RECORDCOUNT"])) {
+            $count = $results["RECORDCOUNT"];
+            $records = $results["COLLECTION"];
+        } else if (!empty($results)) {
+            $count = 1;
+            $records = array($results);
+        }
+
+        return array(
+            "count" => $count,
+            "records" => $records
+        );
     }
 
 }
