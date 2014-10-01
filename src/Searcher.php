@@ -6,11 +6,18 @@ use Secrets\Secret;
 
 class Searcher
 {
+    /**
+     * PeopleSearch\ResultCleaner
+     * @var obejct
+     */
+    protected $standardizer;
 
     protected $url = "https://stage.johnshopkins.edu/portalcontent/search/framework/service/people/peoplewebservice.cfc";
 
     public function __construct($options)
     {
+        $this->standardizer = new ResultStandardizer();
+
         $this->options = (array) Secret::get("jhed") + $options;
 
         if (empty($this->options["ipaddress"])) {
@@ -40,6 +47,8 @@ class Searcher
             $count = 1;
             $records = array($results);
         }
+        
+        $records = array_map(array($this->standardizer, "clean"), $records);
 
         return array(
             "count" => $count,
