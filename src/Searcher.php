@@ -47,8 +47,8 @@ class Searcher
             $count = 1;
             $records = array($results);
         }
-        
-        $records = array_map(array($this->standardizer, "clean"), $records);
+
+        $records = is_array($records) ? array_map(array($this->standardizer, "clean"), $records) : $records;
 
         return array(
             "count" => $count,
