@@ -16,7 +16,7 @@ class ResultStandardizer
 
   public function clean($record)
   {
-    $record->standardized = array(
+    $record["standardized"] = array(
       "email" => $this->findFirstKey($record, "emaildisplay"),
       "phone" => $this->findFirstKey($record, "telephonenumber"),
       "address" => $this->findFirstKey($record, "postaladdress"),
@@ -40,7 +40,7 @@ class ResultStandardizer
 
       $key = "jhe{$aff}{$key}";
 
-      if (isset($record->$key)) return $record->$key;
+      if (isset($record[$key])) return $record[$key];
 
     }
 
@@ -48,7 +48,7 @@ class ResultStandardizer
     return null;
   }
 
-  protected function findAssociations($result) {
+  protected function findAssociations($record) {
 
     $matches = array();
 
@@ -56,17 +56,17 @@ class ResultStandardizer
 
       $institutionKey = "jhe{$aff}orgdn";
 
-      if (isset($result->$institutionKey)) {
+      if (isset($record["$institutionKey"])) {
 
         $titleKey = "jhe{$aff}title";
         $departmentKey = "jhe{$aff}ou";
         $unitKey = "jhe{$aff}orgunitdn";
         
         $matches[] = array(
-          "title" => isset($result->$titleKey) ? $result->$titleKey : null,
-          "department" => isset($result->$departmentKey) ? $result->$departmentKey : null,
-          "unit" => isset($result->$unitKey) ? $result->$unitKey : null,
-          "institution" => $result->$institutionKey
+          "title" => isset($record[$titleKey]) ? $record[$titleKey] : null,
+          "department" => isset($record[$departmentKey]) ? $record[$departmentKey] : null,
+          "unit" => isset($record[$unitKey]) ? $record[$unitKey] : null,
+          "institution" => $record[$institutionKey]
         );
 
       }
