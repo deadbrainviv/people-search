@@ -7,7 +7,7 @@ namespace PeopleSearch;
  */
 class ResultStandardizer
 {
-  protected $affiliations = array("UNIV", "HOSP", "SOM", "APL", "MSO", "KKI", "ISIS", "SIBLEY", "SUBURBAN", "INTRASTAFF", "ADHOC");
+  protected $affiliations = array("UNIV", "HOSP", "SOM", "APL", "MSO", "KKI", "ISIS", "SIBLEY", "SUBURBAN", "INTRASTAFF", "ADHOC", "ACH", "HCGH");
 
   public function __construct()
   {
@@ -71,10 +71,6 @@ class ResultStandardizer
 
       }
 
-    }
-
-    if (empty($matches)) {
-      print_r($result); die();
     }
 
     return $matches;
