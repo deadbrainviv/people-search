@@ -20,7 +20,7 @@ class ResultStandardizer
       "email" => $this->findFirstKey($record, "emaildisplay"),
       "phone" => $this->findFirstKey($record, "telephonenumber"),
       "address" => $this->findFirstKey($record, "postaladdress"),
-      "associations" => $this->findAssociations($record)
+      "affiliations" => $this->findAffiliations($record)
     );
 
     return $record;
@@ -48,7 +48,7 @@ class ResultStandardizer
     return null;
   }
 
-  protected function findAssociations($record) {
+  protected function findAffiliations($record) {
 
     $matches = array();
 
