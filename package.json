@@ -1,6 +1,6 @@
 {
   "name": "people-search",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Perform a JHED People Search request",
   "author": "johnshopkins",
   "license": "MIT",
