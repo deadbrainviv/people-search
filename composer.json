@@ -2,7 +2,7 @@
 {
   "name": "johnshopkins/people-search",
   "description": "Perform a JHED People Search request",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "homepage": "http://github.com/johnshopkins/people-search",
   "license": "MIT",
   "authors": [
