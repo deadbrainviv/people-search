@@ -22,7 +22,7 @@ class Wrapper
 
         // otherwise, get a regular search object
         else {
-            $this->people = new Searcher($options);
+            $this->people = new Searcher($options, $this->env);
         }
 
     }
