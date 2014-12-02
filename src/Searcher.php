@@ -59,10 +59,11 @@ class Searcher
 
         $records = is_array($records) ? array_map(array($this->standardizer, "clean"), $records) : $records;
 
-        return array(
-            "count" => $count,
-            "records" => $records
-        );
+        $return = new \StdClass();
+        $return->count = $count;
+        $return->records = $records;
+
+        return $return;
     }
 
 }
