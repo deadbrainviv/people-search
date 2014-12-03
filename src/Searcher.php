@@ -32,7 +32,9 @@ class Searcher
         if (empty($this->options["ipaddress"])) {
 
             if ($_SERVER["HTTP_X_FORWARDED_FOR"]) {
-                $this->options["ipaddress"] = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                $proxy = $_SERVER["HTTP_X_FORWARDED_FOR"];
+                $proxy = explode(",", $proxy);
+                $this->options["ipaddress"] = $proxy[0];
             } else {
                 $this->options["ipaddress"] = $_SERVER["REMOTE_ADDR"];
             }
