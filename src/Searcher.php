@@ -21,9 +21,9 @@ class Searcher
 
     public function __construct($options, $env)
     {
-        if ($env == "staging") {
-            $this->url = "https://stage.johnshopkins.edu/portalcontent/search/framework/service/people/peoplewebservice.cfc";
-        }
+        // if ($env == "staging") {
+        //     $this->url = "https://stage.johnshopkins.edu/portalcontent/search/framework/service/people/peoplewebservice.cfc";
+        // }
 
         $this->standardizer = new ResultStandardizer();
 
