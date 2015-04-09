@@ -45,6 +45,7 @@ class Searcher
         curl_setopt($c, CURLOPT_URL, $this->getUrl());
         // curl_setopt($c, CURLOPT_URL, "https://my.johnshopkins.edu/t.cfm");
         curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($c, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($c, CURLOPT_REFERER, "http://www.jhu.edu");
         $resp = curl_exec($c);
         curl_close($c);
