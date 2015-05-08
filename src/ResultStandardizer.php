@@ -3,7 +3,7 @@
 namespace PeopleSearch;
 
 /**
- * 
+ *
  */
 class ResultStandardizer
 {
@@ -38,9 +38,9 @@ class ResultStandardizer
   {
     foreach ($this->affiliations as $aff) {
 
-      $key = "jhe{$aff}{$key}";
+      $k = "jhe{$aff}{$key}";
 
-      if (isset($record[$key])) return $record[$key];
+      if (isset($record[$k])) return $record[$k];
 
     }
 
@@ -61,7 +61,7 @@ class ResultStandardizer
         $titleKey = "jhe{$aff}title";
         $departmentKey = "jhe{$aff}ou";
         $unitKey = "jhe{$aff}orgunitdn";
-        
+
         $matches[] = array(
           "title" => isset($record[$titleKey]) ? $record[$titleKey] : null,
           "department" => isset($record[$departmentKey]) ? $record[$departmentKey] : null,
