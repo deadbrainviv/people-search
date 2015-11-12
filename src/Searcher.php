@@ -30,7 +30,9 @@ class Searcher
         $this->options = (array) Secret::get("jhed") + $options;
 
         if (empty($this->options["ipaddress"])) {
-            $this->options["ipaddress"] = $_SERVER["REMOTE_ADDR"];
+
+          $ip = isset($_SERVER["HTTP_X_FORWARDED_FOR"]) ? $_SERVER["HTTP_X_FORWARDED_FOR"] : $_SERVER["REMOTE_ADDR"];
+          $this->options["ipaddress"] = $ip;
         }
     }
 
