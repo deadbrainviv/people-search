@@ -29,16 +29,6 @@ class Searcher
 
         $this->options = (array) Secret::get("jhed") + $options;
 
-        if (isset($this->options["ipaddress"])) {
-          error_log("sent ip: " . $this->options["ipaddress"]);
-        }
-
-        $ip_in_wrapper = isset($_SERVER["HTTP_X_FORWARDED_FOR"]) ? $_SERVER["HTTP_X_FORWARDED_FOR"] : $_SERVER["REMOTE_ADDR"];
-        error_log("in wrapper: " . $ip_in_wrapper);
-
-        error_log("---");
-
-
         // this ends up getting the IP address of the server...
         if (empty($this->options["ipaddress"])) {
 
