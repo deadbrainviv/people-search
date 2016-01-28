@@ -29,7 +29,10 @@ class Searcher
 
         $this->options = (array) Secret::get("jhed") + $options;
 
-        error_log("sent ip: " . $this->options["ipaddress"]);
+        if (isset($this->options["ipaddress"])) {
+          error_log("sent ip: " . $this->options["ipaddress"]);
+        }
+
         $ip_in_wrapper = isset($_SERVER["HTTP_X_FORWARDED_FOR"]) ? $_SERVER["HTTP_X_FORWARDED_FOR"] : $_SERVER["REMOTE_ADDR"];
         error_log("in wrapper: " . $ip_in_wrapper);
 
