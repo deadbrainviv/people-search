@@ -55,21 +55,44 @@ class Searcher
       $records = array($results);
     }
 
+    $results = new \StdClass();
+    $results->count = $count;
+    $results->records = $records;
+
+    return $results;
+  }
+
+  public function clean($results)
+  {
+    if (!is_array($results->records)) return $results;
+
+    $initialCount = $results->count;
+
     $per_page = isset($this->params["per_page"]) ? $this->params["per_page"] : 100;
 
-    if (is_array($records) && count($records > $per_page)) {
+    if ($per_page > $results->count) {
       // slice off some records
-      $records = array_slice($records, 0, $per_page);
-      $count = $per_page;
+      $results->records = array_slice($results->records, 0, $per_page);
+      $results->count = $per_page;
     }
 
-    $records = is_array($records) ? array_map(array($this->standardizer, "clean"), $records) : $records;
+    foreach ($cleaned->records as &$record) {
 
-    $return = new \StdClass();
-    $return->count = $count;
-    $return->records = $records;
+      if ($initialCount->count > 1) {
 
-    return $return;
+        // fetch the entire item
+        $this->params["criteria"] = $record->uid;
+        $result = $this->search();
+        if ($result->count === 1) {
+          $record = $result->records;
+        }
+
+      }
+
+      $record = $this->standardizer->clean($record);
+    }
+
+    return $$cleaned->records;
   }
 
 }
