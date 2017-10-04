@@ -9,11 +9,6 @@ class ResultStandardizer
 {
   protected $affiliations = array("UNIV", "HOSP", "SOM", "APL", "MSO", "KKI", "ISIS", "SIBLEY", "SUBURBAN", "INTRASTAFF", "ADHOC", "ACH", "HCGH");
 
-  public function __construct()
-  {
-
-  }
-
   public function clean($record)
   {
     $record["standardized"] = array(
