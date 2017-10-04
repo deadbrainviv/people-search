@@ -76,7 +76,7 @@ class Searcher
 
     $per_page = isset($this->params["per_page"]) ? $this->params["per_page"] : 100;
 
-    if ($per_page > $results->count) {
+    if ($results->count > $per_page) {
       // slice off some records
       $results->records = array_slice($results->records, 0, $per_page);
       $results->count = $per_page;
