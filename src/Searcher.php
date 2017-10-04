@@ -90,7 +90,7 @@ class Searcher
         $this->params["criteria"] = $record["uid"];
         $result = $this->getRecords();
         if ($result->count === 1) {
-          $record = $result->records;
+          $record = $result->records[0];
         }
 
       }
