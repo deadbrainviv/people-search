@@ -36,6 +36,12 @@ class Searcher
 
   public function search()
   {
+    $results = $this->getRecords();
+    return $this->clean($results);
+  }
+
+  protected function getRecords()
+  {
     $c = curl_init();
     curl_setopt($c, CURLOPT_URL, $this->getUrl());
     curl_setopt($c, CURLOPT_RETURNTRANSFER, true);
@@ -62,7 +68,7 @@ class Searcher
     return $results;
   }
 
-  public function clean($results)
+  protected function clean($results)
   {
     if (!is_array($results->records)) return $results;
 
@@ -76,13 +82,13 @@ class Searcher
       $results->count = $per_page;
     }
 
-    foreach ($cleaned->records as &$record) {
+    foreach ($results->records as &$record) {
 
-      if ($initialCount->count > 1) {
+      if ($initialCount > 1) {
 
         // fetch the entire item
-        $this->params["criteria"] = $record->uid;
-        $result = $this->search();
+        $this->params["criteria"] = $record["uid"];
+        $result = $this->getRecords();
         if ($result->count === 1) {
           $record = $result->records;
         }
@@ -92,7 +98,7 @@ class Searcher
       $record = $this->standardizer->clean($record);
     }
 
-    return $$cleaned->records;
+    return $results;
   }
 
 }
